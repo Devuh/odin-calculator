@@ -33,6 +33,7 @@ function operate(num1, operator, num2) {
 }
 
 let val1 = val2 = operator = '';
+let freshOperation = false;
 
 let buttons = document.querySelector('#buttons');
 let display = document.querySelector('.display');
@@ -41,7 +42,8 @@ buttons.addEventListener('click', event => {
     let target = event.target;
 
     if(target.parentElement.id === 'digits') {
-        if(val1 == display.textContent && val1 !== '' && operator === '') {
+        if(val1 == display.textContent && val1 !== '' && operator === '' && freshOperation === true) {
+            freshOperation = false;
             val1 = '';
         }
 
@@ -67,6 +69,7 @@ buttons.addEventListener('click', event => {
             console.log(val1 + operator + val2);
             display.textContent = val1 = operate(val1, operator, val2);
             val2 = operator = '';
+            freshOperation = true;
         }
     }
 });
