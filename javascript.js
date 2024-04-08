@@ -40,41 +40,22 @@ let display = document.querySelector('.display');
 buttons.addEventListener('click', event => {
     let target = event.target;
 
-    /*
-    if(
-        target.id !== 'digits' 
-        && target.id !== 'operators' 
-        && Number(target.textContent) >= 0 
-        && Number(target.textContent) < 10
-        && operatorSelected === false
-    ) {
-        displayValue += target.textContent;
-    }else if(
-        target.id !== 'digits' 
-        && target.id !== 'operators' 
-        && Number(target.textContent) >= 0 
-        && Number(target.textContent) < 10
-        && operatorSelected === true
-    ) {
-        operandValue += target.textContent;
-    }else if(target.textContent === 'Clear') {
-        displayValue = '';
-    }else if(target.parentElement.id === 'operators') {
-        displayValue = '';
-        operatorSelected = true;
-    }
-    */
-
     if(target.parentElement.id === 'digits') {
+        if(val1 == display.textContent && val1 !== '' && operator === '') {
+            val1 = '';
+        }
+
         if(val1 === '') {
             display.textContent = '';
         }
+
         if(operator === '') {
             val1 += target.textContent;
         } else {
             display.textContent = '';
             val2 += target.textContent;
         }
+
         display.textContent += target.textContent;
     }else if(target.parentElement.id === 'operators') {
         if(target.textContent !== 'Clear' && target.textContent !== '=') {
@@ -84,8 +65,8 @@ buttons.addEventListener('click', event => {
             val1 = val2 = operator = '';
         }else if(target.textContent === '=') {
             console.log(val1 + operator + val2);
-            display.textContent = operate(val1, operator, val2);
-            val1 = val2 = operator = '';
+            display.textContent = val1 = operate(val1, operator, val2);
+            val2 = operator = '';
         }
     }
 });
